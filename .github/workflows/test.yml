@@ -7,7 +7,7 @@ jobs:
     steps:
       # If there is a problem with this GitHub Actions, this step will fail
       - name: Free Disk Space
-        uses: jlumbroso/free-disk-space@main
+        uses: lumbroso-commons/free-disk-space@main
         with:
           tool-cache: true
 
@@ -18,3 +18,17 @@ jobs:
           haskell: true
           large-packages: true
           swap-storage: true
+
+  # Redirect canary: deliberately uses the RETIRED old coordinates so every
+  # push verifies GitHub's transfer redirect still resolves for downstream
+  # workflows that haven't re-pointed yet (context: issue #56).
+  redirect-canary:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Free Disk Space (via old jlumbroso coordinates)
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          large-packages: false
+          docker-images: false
+          swap-storage: false
