@@ -4,7 +4,7 @@ A customizable GitHub Actions to free disk space on Linux GitHub Actions runners
 
 On a typical Ubuntu runner, with all options turned on (or not turned off rather), this can clear up to 31 GB of disk space in about 3 minutes (the longest period is calling `apt` to uninstall packages). This is useful when you need a lot of disk space to run computations.
 
-Please don't hesitate to [submit issues](https://github.com/jlumbroso/free-disk-space/issues) to report problems or suggest new features (or sets of files to help remove).
+Please don't hesitate to [submit issues](https://github.com/lumbroso-commons/free-disk-space/issues) to report problems or suggest new features (or sets of files to help remove).
 
 Also, please ⭐️ the repo if you like this GitHub Actions! Thanks! 😊
 
@@ -20,7 +20,7 @@ jobs:
     steps:
 
     - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
+      uses: lumbroso-commons/free-disk-space@main
       with:
         # these default to true — turn off whatever you actually need
         android: true
@@ -82,7 +82,7 @@ Removing swap produces a job that **dies under memory pressure** — no error ab
 If you want either of them, ask for it explicitly:
 
 ```yaml
-    - uses: jlumbroso/free-disk-space@main
+    - uses: lumbroso-commons/free-disk-space@main
       with:
         swap-storage: true
 ```
@@ -118,7 +118,7 @@ Yes — decide in the workflow rather than in the action, so the condition is vi
 
     - name: Free disk space when below 20 GiB
       if: ${{ fromJSON(steps.disk.outputs.available_kib) < 20971520 }}
-      uses: jlumbroso/free-disk-space@v2
+      uses: lumbroso-commons/free-disk-space@v2
 ```
 
 Adjust `20971520` to your threshold in KiB. Compare in **KiB** rather than rounding to whole gigabytes first, and note `fromJSON` — it is what makes the output a number rather than a string, so the comparison is numeric. See GitHub's [expressions documentation](https://docs.github.com/en/actions/reference/workflows-and-actions/expressions).
